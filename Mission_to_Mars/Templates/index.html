@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mission to Mars</title>
+  <style>
+    body {margin: auto; padding: 60px;}
+    #mars-facts {margin: auto;}
+    figure {padding: 15px;}
+  </style>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="jumbotron text-center">
+      <h1>Mission to Mars</h1>
+      <p>Get the latest Mars information here!</p>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Get Mars Data</a></p>
+    </div>
+
+    <!-- # --------- NASA Mars News --------- -->
+    <div class="row" id="mars-news">
+      <div class="col-md-12">
+        <h2 class="heading">Latest Mars News</h2>
+        <h4>{{mars_data.news_title}}</h4>
+        <p>{{mars_data.news_p}}</p>
+      </div>
+    </div>
+    <br>
+
+    <!-- # --------- JPL Mars Space Images - Featured Image --------- -->
+    <div class="row" id="featured-image">
+      <div class="col-md-8 col-sm-12">
+      <h2 class="heading">Featured Mars Image</h2>
+      <img class="img-responsive" src="{{mars_data.featured_image_url}}" alt="Mars Image">
+      </div>
+    <!--  --------- Mars Facts --------- -->
+      <div class="col-md-4 col-sm-12">
+        <div class="row" id="mars-facts">
+          <h2 class="heading-facts">Mars Facts</h2>
+          <div class="table table-striped">
+          {{ mars_data.mars_table | safe }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <br>
+
+    <!-- --------- Mars Hemispheres --------- -->
+    <div class="row" id="hemispheres">
+      <div class="col-md-12">
+        <h2 class = "heading text-center">Mars Hemispheres</h2>
+      </div> 
+      <br>
+      <!-- Loop through the dictionary -->
+      <div class="row text-center">
+          {% for img in mars_data.hemisphere_image_urls %}
+            <div class="col-md-6 col-sm-12">
+              <figure class="figure comparison-fig-left">
+              <img class="card-img img-responsive" src="{{img["img_url"]}}" alt="Mars Hemispheres Image">
+              <h4> {{img["title"]}}</h4>
+              </figure> 
+            </div>
+          {% endfor %}
+      </div>
+    </div> 
+  </div>    
+</body>
+</html>
