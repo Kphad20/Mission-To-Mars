@@ -39,8 +39,10 @@ def scrape():
     mars_image_html = browser.html
     soup_mars_image = bs(mars_image_html, "html.parser")
 
+    # Get thread for image url
     thread = soup_mars_image.find("article", class_="carousel_item")["style"]
 
+    # Manipulate url string to get full image url
     featured_image_url = "https://www.jpl.nasa.gov" + thread.replace("background-image: url('","").replace("');","")
 
     browser.quit()
